@@ -775,3 +775,14 @@ in APPPATH\Views\edit.php on line 925.
  7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
  8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-07-11 13:04:56 --> Undefined variable $citybystate
+in APPPATH\Views\edit.php on line 887.
+ 1 APPPATH\Views\edit.php(887): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $citybystate', 'C:\\xampp\\htdocs\\cloudy\\app\\Views\\edit.php', 887)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\cloudy\\app\\Views\\edit.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('edit', [], true)
+ 5 APPPATH\Controllers\Home.php(70): view('edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Home->edit('6')
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
