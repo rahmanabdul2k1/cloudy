@@ -881,9 +881,12 @@
         }
 
         $(document).ready(function() {
-            var city = "<option selected><?= $user['city'] ?></option> ";
             for (id in citybystate["<?= $user['state'] ?>"]) {
-                city += "<option>" + citybystate["<?= $user['state'] ?>"][id] + "</option>";
+                if (citybystate["<?= $user['state'] ?>"][id] == "<?= $user['city'] ?>") {
+                    city += "<option selected>" + citybystate["<?= $user['state'] ?>"][id] + "</option>";
+                } else {
+                    city += "<option>" + citybystate["<?= $user['state'] ?>"][id] + "</option>";
+                }
             }
             document.querySelector(".city").innerHTML = city;
         });
