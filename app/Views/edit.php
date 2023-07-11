@@ -14,7 +14,7 @@
     <div class="container col-sm-12 col-lg-8 mt-5 mb-5">
         <div class="row justify-content-center">
             <div class="col-md-12 col-lg-12 col-xl-8 col-xxl-4">
-                <form id="clearform">
+                <form action="<?= site_url('edit/' . $user['id']) ?>" method="post">
                     <div class="form-floating mt-4">
                         <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="<?= $user['name'] ?>" required />
                         <label for="validationCustom01" class="form-label">Name</label>
@@ -118,7 +118,7 @@
                     </span>
 
                     <div class="mt-4">
-                        <button type="button" id="myForm" class="btn btn-primary w-100">Submit</button>
+                        <button type="submit" id="myForm" class="btn btn-primary w-100">Submit</button>
                     </div>
                 </form>
             </div>

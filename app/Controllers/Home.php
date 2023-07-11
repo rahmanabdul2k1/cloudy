@@ -41,29 +41,36 @@ class Home extends BaseController
         $data['page_title'] = 'Edit';
         if ($this->request->is('post')) {
             $rules = [
-                'unit_name' => 'required|alpha_space',
-                'unit_status' => 'numeric',
+                'name' => 'required',
+                'phone' => 'required|numeric|min_length[10]|max_length[10]',
+                'email' => 'required|valid_email|is_unique[users.email]',
+                'address' => 'required',
+                'state' => 'required|alpha_space',
+                'city' => 'required|alpha_space',
             ];
             if ($this->validate($rules)) {
                 $data = [
-                    'unit_name' => $this->request->getVar('unit_name'),
-                    'unit_status' => $this->request->getVar('unit_status'),
+                    'name' => $this->request->getVar('name'),
+                    'phone' => $this->request->getVar('phone'),
+                    'email' => $this->request->getVar('email'),
+                    'address' => $this->request->getVar('address'),
+                    'state' => $this->request->getVar('state'),
+                    'city' => $this->request->getVar('city'),
                 ];
+                $output = new \stdClass();
                 if ($user->update($id, $data)) {
-                    session()->setFlashdata('status', 'Data Updated Successfully!');
-                    session()->setFlashdata('color', 'alert-success');
-                    return redirect('/');
+                    $output->status = 200;
+                    $output->users = $user->findAll();
+                    echo json_encode($output);
                 } else {
-                    session()->setFlashdata('status', 'Something Wrong!');
-                    session()->setFlashdata('color', 'alert-danger');
-                    return redirect('/');
+                    $output->status = 400;
+                    $output->users = $user->findAll();
+                    echo json_encode($output);
                 }
             } else {
-                $data['unit'] = $user->find($id);
+                $data['user'] = $user->find($id);
                 $data['validation'] = $this->validator;
-                return view('header', $data)
-                    . view('edit_unit', $data)
-                    . view('footer');
+                return view('edit', $data);
             }
         } else {
             $data['user'] = $user->find($id);
