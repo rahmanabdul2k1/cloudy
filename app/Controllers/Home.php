@@ -43,7 +43,7 @@ class Home extends BaseController
             $rules = [
                 'name' => 'required',
                 'phone' => 'required|numeric|min_length[10]|max_length[10]',
-                'email' => 'required|valid_email|is_unique[users.email]',
+                'email' => 'required|valid_email',
                 'address' => 'required',
                 'state' => 'required|alpha_space',
                 'city' => 'required|alpha_space',
@@ -57,16 +57,8 @@ class Home extends BaseController
                     'state' => $this->request->getVar('state'),
                     'city' => $this->request->getVar('city'),
                 ];
-                $output = new \stdClass();
-                if ($user->update($id, $data)) {
-                    $output->status = 200;
-                    $output->users = $user->findAll();
-                    echo json_encode($output);
-                } else {
-                    $output->status = 400;
-                    $output->users = $user->findAll();
-                    echo json_encode($output);
-                }
+                $user->update($id, $data);
+                return redirect("/");
             } else {
                 $data['user'] = $user->find($id);
                 $data['validation'] = $this->validator;

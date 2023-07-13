@@ -14,38 +14,48 @@
     <div class="container col-sm-12 col-lg-8 mt-5 mb-5">
         <div class="row justify-content-center">
             <div class="col-md-12 col-lg-12 col-xl-8 col-xxl-4">
-                <form action="<?= site_url('edit/' . $user['id']) ?>" method="post">
+                <form action="<?= site_url('edit/' . $user['id']) ?>" method="post" enctype="multipart/form-data">
+                    <?php $validation = \Config\Services::validation(); ?>
                     <div class="form-floating mt-4">
                         <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="<?= $user['name'] ?>" required />
                         <label for="validationCustom01" class="form-label">Name</label>
                     </div>
-                    <span style="color:red;display:none" id="error_name">
-                        Kindly fill your name
-                    </span>
+                    <?php if ($validation->getError('name')) { ?>
+                        <span style="color:red">
+                            <?= $error = $validation->getError('name'); ?>
+                        </span>
+                    <?php } ?>
 
                     <div class="form-floating mt-4">
                         <input type="number" class="form-control" id="phone" placeholder="Phone" name="phone" value="<?= $user['phone'] ?>" maxlength="10" onkeypress="return /[0-9]/i.test(event.key)" required />
                         <label for="validationCustom02" class="form-label">Phone</label>
                     </div>
-                    <span style="color:red;display:none" id="error_phone">
-                        Phone Number must be 10 digit
-                    </span>
+                    <?php if ($validation->getError('phone')) { ?>
+                        <span style="color:red">
+                            <?= $error = $validation->getError('phone'); ?>
+                        </span>
+                    <?php } ?>
 
                     <div class="form-floating mt-4">
                         <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<?= $user['email'] ?>" required />
                         <label for="validationCustom03" class="form-label">Email</label>
                     </div>
-                    <span style="color:red;display:none" id="error_email">
-                        Kindly enter your email id
-                    </span>
+                    <?php if ($validation->getError('email')) { ?>
+                        <span style="color:red">
+                            <?= $error = $validation->getError('email'); ?>
+                        </span>
+                    <?php } ?>
 
                     <div class="form-group mt-4">
                         <label for="validationCustom04" class="form-label">Address</label>
                         <textarea class="form-control" placeholder="Kindly enter your address" id="address" rows="5" name="address" required><?= $user['address'] ?></textarea>
                     </div>
-                    <span style="color:red;display:none" id="error_address">
-                        Kindly enter your address
-                    </span>
+                    <?php if ($validation->getError('address')) { ?>
+                        <span style="color:red">
+                            <?= $error = $validation->getError('address'); ?>
+                        </span>
+                    <?php } ?>
+
                     <div class="form-floating mt-4">
                         <select class="form-select" name="state" id="state" onChange="changestate(this.value);" required>
                             <option selected disabled hidden value="">Choose State</option>
@@ -103,9 +113,11 @@
                         </select>
                         <label for="validationCustom05" class="form-label">State</label>
                     </div>
-                    <span style="color:red;display:none" id="error_state">
-                        Kindly select your state
-                    </span>
+                    <?php if ($validation->getError('state')) { ?>
+                        <span style="color:red">
+                            <?= $error = $validation->getError('state'); ?>
+                        </span>
+                    <?php } ?>
 
                     <div class="form-floating mt-4">
                         <select class="form-select city" name="city" id="city" required>
@@ -113,9 +125,11 @@
                         </select>
                         <label class="form-label" for="validationCustom06">City</label>
                     </div>
-                    <span style="color:red;display:none" id="error_city">
-                        Kindly select your city
-                    </span>
+                    <?php if ($validation->getError('city')) { ?>
+                        <span style="color:red">
+                            <?= $error = $validation->getError('city'); ?>
+                        </span>
+                    <?php } ?>
 
                     <div class="mt-4">
                         <button type="submit" id="myForm" class="btn btn-primary w-100">Submit</button>
